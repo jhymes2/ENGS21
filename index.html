@@ -40,11 +40,27 @@
     /* ── HERO ── */
     header {
       position: relative;
-      background: var(--bark);
+      background: var(--bark) url('hero.png') center center / cover no-repeat;
       color: var(--flax);
       text-align: center;
-      padding: 5rem 2rem 4rem;
+      padding: 7rem 2rem 6rem;
       overflow: hidden;
+    }
+
+    header .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(40, 22, 8, 0.72) 0%,
+        rgba(40, 22, 8, 0.55) 60%,
+        rgba(30, 16, 4, 0.85) 100%
+      );
+    }
+
+    header > *:not(.hero-overlay) {
+      position: relative;
+      z-index: 1;
     }
 
     header::after {
@@ -295,6 +311,7 @@
 <body>
 
 <header>
+  <div class="hero-overlay"></div>
   <div class="rope-deco">〰〰〰〰〰〰〰〰〰〰〰〰</div>
   <h1>On Belay?</h1>
   <p class="sub">An automated climbing wall sanitization system</p>
