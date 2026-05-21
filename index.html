@@ -7,15 +7,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bark:    #5C3D1E;
-      --clay:    #A0522D;
-      --oat:     #C9A96E;
-      --flax:    #E8D9B5;
-      --cream:   #F7F1E3;
-      --moss:    #5A6E3A;
+      --green:   #4BD28F;
+      --teal:    #4BD2D2;
+      --blue:    #4B8FD2;
+
+      --bark:    #4B8FD2;   /* body text → blue */
+      --clay:    #4BD2D2;   /* h2 / metrics → teal */
+      --oat:     #C9A96E;   /* borders / accents */
+      --flax:    #E8D9B5;   /* light backgrounds */
+      --cream:   #F7F1E3;   /* page background */
+      --moss:    #4BD28F;   /* h3 titles / roles → green; also used as accent bg */
       --sage:    #8FA870;
-      --stone:   #7A7060;
-      --chalk:   #FAFAF5;
+      --stone:   #4B8FD2;   /* secondary body text → blue */
+      --chalk:   #FAFAF5;   /* card backgrounds */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,16 +87,16 @@
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.8rem, 8vw, 5.5rem);
       font-weight: 900;
-      color: var(--oat);
+      color: var(--green);
       line-height: 1.1;
     }
 
     header .sub {
       font-style: italic;
       font-size: 1.15rem;
-      color: var(--flax);
+      color: var(--teal);
       margin-top: 0.75rem;
-      opacity: 0.85;
+      opacity: 0.95;
     }
 
     .badge {
@@ -269,8 +273,8 @@
     }
 
     .hw-table th {
-      background: var(--bark);
-      color: var(--flax);
+      background: #1a2a3a;
+      color: var(--teal);
       text-align: left;
       padding: 0.6rem 0.9rem;
       font-family: 'Playfair Display', serif;
@@ -292,20 +296,19 @@
       border-radius: 3px;
       font-size: 0.88em;
       font-family: 'Courier New', monospace;
-      color: var(--clay);
+      color: var(--teal);
     }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--bark);
-      color: var(--flax);
+      background: #0f1e2e;
+      color: var(--blue);
       text-align: center;
       padding: 2rem 1rem;
       font-size: 0.85rem;
-      opacity: 0.9;
     }
 
-    footer a { color: var(--oat); }
+    footer a { color: var(--green); }
   </style>
 </head>
 <body>
