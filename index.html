@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>On Belay? — ENGS21 Climbing Wall Cleaner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bark:    #5C3D1E;
+      --clay:    #A0522D;
+      --oat:     #C9A96E;
+      --flax:    #E8D9B5;
+      --cream:   #F7F1E3;
+      --moss:    #5A6E3A;
+      --sage:    #8FA870;
+      --stone:   #7A7060;
+      --chalk:   #FAFAF5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--cream);
+      color: var(--bark);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.75;
+    }
+
+    /* ── TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HERO ── */
+    header {
+      position: relative;
+      background: var(--bark);
+      color: var(--flax);
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 60px;
+      background: var(--cream);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+
+    .rope-deco {
+      font-size: 2.5rem;
+      letter-spacing: 0.5rem;
+      opacity: 0.35;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 900;
+      color: var(--oat);
+      line-height: 1.1;
+    }
+
+    header .sub {
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--flax);
+      margin-top: 0.75rem;
+      opacity: 0.85;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background: var(--moss);
+      color: var(--chalk);
+      font-family: 'Lora', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    section { margin-bottom: 4rem; }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.85rem;
+      color: var(--clay);
+      border-bottom: 2px solid var(--oat);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    p { margin-bottom: 1rem; }
+
+    /* ── CALLOUT BOX ── */
+    .callout {
+      background: var(--flax);
+      border-left: 5px solid var(--moss);
+      border-radius: 4px;
+      padding: 1.1rem 1.4rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: var(--stone);
+    }
+
+    /* ── SPEC CARDS ── */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1.25rem;
+    }
+
+    .spec-card {
+      background: var(--chalk);
+      border: 1px solid var(--oat);
+      border-radius: 8px;
+      padding: 1.1rem 1.2rem;
+    }
+
+    .spec-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--moss);
+      margin-bottom: 0.3rem;
+    }
+
+    .spec-card .metric {
+      font-weight: 600;
+      color: var(--clay);
+      font-size: 0.95rem;
+    }
+
+    .spec-card p {
+      font-size: 0.88rem;
+      color: var(--stone);
+      margin-bottom: 0;
+    }
+
+    /* ── SOLUTIONS ── */
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .sol-card {
+      background: var(--flax);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      border-top: 4px solid var(--oat);
+      font-size: 0.9rem;
+    }
+
+    .sol-card.chosen {
+      border-top-color: var(--moss);
+      background: #edf5e4;
+    }
+
+    .sol-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--bark);
+    }
+
+    .sol-card .score {
+      font-weight: 700;
+      color: var(--clay);
+      font-size: 0.85rem;
+    }
+
+    .sol-card.chosen .score { color: var(--moss); }
+
+    .chosen-tag {
+      display: inline-block;
+      background: var(--moss);
+      color: white;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── TEAM ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1.25rem;
+    }
+
+    .team-card {
+      background: var(--chalk);
+      border-radius: 8px;
+      padding: 1.1rem 1.2rem;
+      border-bottom: 3px solid var(--oat);
+    }
+
+    .team-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--bark);
+      margin-bottom: 0.2rem;
+    }
+
+    .team-card .role {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--moss);
+      margin-bottom: 0.5rem;
+    }
+
+    .team-card p {
+      font-size: 0.85rem;
+      color: var(--stone);
+      margin-bottom: 0;
+    }
+
+    /* ── HARDWARE ── */
+    .hw-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.92rem;
+    }
+
+    .hw-table th {
+      background: var(--bark);
+      color: var(--flax);
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .hw-table td {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 1px solid var(--oat);
+      color: var(--bark);
+    }
+
+    .hw-table tr:nth-child(even) td { background: var(--flax); }
+
+    code {
+      background: var(--flax);
+      border: 1px solid var(--oat);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      font-size: 0.88em;
+      font-family: 'Courier New', monospace;
+      color: var(--clay);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark);
+      color: var(--flax);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    footer a { color: var(--oat); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="rope-deco">〰〰〰〰〰〰〰〰〰〰〰〰</div>
+  <h1>On Belay?</h1>
+  <p class="sub">An automated climbing wall sanitization system</p>
+  <span class="badge">ENGS 21 — Dartmouth Engineering</span>
+</header>
+
+<main>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <h2>The Problem</h2>
+    <p>
+      Indoor climbing gym walls are difficult to clean, resulting in infrequent cleaning and the buildup
+      of harmful bacteria — including what one study called a <em>"fecal veneer"</em> detectable on every wall
+      surface tested (Bräuer et al., 2014). With over <strong>695 commercial climbing gyms</strong> operating
+      in the US in 2026 and <strong>5.6 million indoor climbers</strong>, the exposure risk is significant.
+    </p>
+    <p>
+      Climbers spread bacteria via chalk-dusted hands and shoes, especially after restroom visits.
+      Current cleaning methods — an employee on a spray bottle lowered down the wall, or an annual
+      panel power-wash — are so labor-intensive that they are routinely skipped.
+    </p>
+    <div class="callout">
+      "Both existing solutions result in infrequent cleanings or a lack of thorough sanitation."
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section id="solution">
+    <h2>Our Solution</h2>
+    <p>
+      <strong>On Belay?</strong> is a rope-mounted cleaning device that clips into the existing
+      top-rope belay infrastructure already present in every climbing gym. Two or more motor-powered
+      oscillating brushes scrub chalk and residue from the wall surface as an employee slowly lowers
+      the device. A spray system applies disinfectant, and a Shop-Vac attachment evacuates dislodged
+      chalk dust — no new rail infrastructure required.
+    </p>
+    <p>
+      The device is controlled via an <strong>Arduino Nano</strong> managing relay outputs for the
+      belay mechanism, brush motors, spray solenoid, and status light. Future revisions may add
+      Bluetooth remote control (ZS-040 / HM-10 module) for hands-free operation.
+    </p>
+
+    <h2 style="margin-top:2.5rem">Alternatives Considered</h2>
+    <div class="solutions-grid">
+      <div class="sol-card chosen">
+        <span class="chosen-tag">Selected</span>
+        <h3>On Belay?</h3>
+        <p>Rope-mounted, oscillating brushes, spray + vac, uses existing infrastructure.</p>
+        <p class="score">Score: 57 / 72</p>
+      </div>
+      <div class="sol-card">
+        <h3>Clean-O-Drapes</h3>
+        <p>Microfiber curtain on a ceiling rail, soaked in disinfectant, dragged across the wall.</p>
+        <p class="score">Score: 55.5 / 72</p>
+      </div>
+      <div class="sol-card">
+        <h3>Wallba</h3>
+        <p>Suction-powered autonomous robot navigates the wall — highest automation, highest complexity.</p>
+        <p class="score">Score: 46 / 72</p>
+      </div>
+      <div class="sol-card">
+        <h3>Clean Stik</h3>
+        <p>Telescoping pole with scrubber head; similar to state of the art but ground-operated.</p>
+        <p class="score">Score: 47 / 72</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECS -->
+  <section id="specs">
+    <h2>Design Specifications</h2>
+    <div class="specs-grid">
+      <div class="spec-card">
+        <h3>Ease of Use</h3>
+        <p class="metric">&lt; 15 min setup, single operator</p>
+        <p>Addresses the core labor-intensity of current methods.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Efficacy</h3>
+        <p class="metric">&gt; 80% bacteria reduction</p>
+        <p>Kills pathogens and removes visible chalk buildup.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Damage-Free</h3>
+        <p class="metric">No visible wall damage</p>
+        <p>Critical for gym adoption — protects their facility investment.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Speed</h3>
+        <p class="metric">&lt; 15 min per wall section</p>
+        <p>360 sq ft (5–6 ft wide × 60 ft tall) per cleaning cycle.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Durability</h3>
+        <p class="metric">100+ wall cleanings</p>
+        <p>Stress tested for long-term reliable operation.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Cost</h3>
+        <p class="metric">&lt; $300 total system</p>
+        <p>Economically viable for commercial gym purchase.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Safety</h3>
+        <p class="metric">All safety standards met</p>
+        <p>Disinfectant handling, chalk dust ventilation, electronics.</p>
+      </div>
+      <div class="spec-card">
+        <h3>Legal &amp; Ethical</h3>
+        <p class="metric">Full compliance</p>
+        <p>Meets all US legal requirements; no ethical concerns.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HARDWARE -->
+  <section id="hardware">
+    <h2>Electronics &amp; Hardware</h2>
+    <p>
+      The control system runs on an <strong>Arduino Nano (ATmega328)</strong> via PlatformIO.
+      Four digital outputs manage the core actuators through relay modules:
+    </p>
+    <table class="hw-table">
+      <thead>
+        <tr><th>Constant</th><th>Pin</th><th>Function</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>PIN_RELAY_BELAY</code></td><td>D2</td><td>Belay motor relay</td></tr>
+        <tr><td><code>PIN_RELAY_BRUSH</code></td><td>D3</td><td>Oscillating brush motor relay</td></tr>
+        <tr><td><code>PIN_RELAY_SPRAY</code></td><td>D4</td><td>Disinfectant spray solenoid relay</td></tr>
+        <tr><td><code>PIN_SIGNAL_LIGHT</code></td><td>D13 (LED_BUILTIN)</td><td>Status indicator light</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1rem">
+      Built with the Arduino framework. Source available on GitHub.
+    </p>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <h2>The Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <h3>Finnley Blankenship</h3>
+        <div class="role">Lead &amp; Sanitation Testing</div>
+        <p>Group lead, culture growing and bacteria testing, delegation and official correspondence.</p>
+      </div>
+      <div class="team-card">
+        <h3>Jonah Hymes</h3>
+        <div class="role">Treasurer &amp; Software / Electrical</div>
+        <p>Budget tracking, software development, and all electronics design and implementation.</p>
+      </div>
+      <div class="team-card">
+        <h3>Gaven May</h3>
+        <div class="role">Mechanical Testing &amp; Writing</div>
+        <p>Documents all tests, leads mechanical stress testing, and organizes written deliverables.</p>
+      </div>
+      <div class="team-card">
+        <h3>Greta Batchelor</h3>
+        <div class="role">CAD, Fabrication &amp; Records</div>
+        <p>Leads all CAD modeling and machine shop fabrication; maintains project records.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>ENGS 21 &mdash; Dartmouth College &mdash; 2026</p>
+  <p style="margin-top:0.4rem; opacity:0.7">
+    Bräuer et al. (2014) &bull; Climbing Business Journal (2022, 2026) &bull;
+    Won et al. (2022, Patent US 2024/0217092 A1)
+  </p>
+</footer>
+
+</body>
+</html>
