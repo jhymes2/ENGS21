@@ -1,8 +1,8 @@
 #include <Arduino.h>
 
-#define PIN_RELAY_BELAY   2
-#define PIN_RELAY_BRUSH   3
-#define PIN_RELAY_SPRAY   4
+#define PIN_RELAY_SPRAY   2 // spray
+#define PIN_RELAY_BELAY   3 //disconnect
+#define PIN_RELAY_BRUSH   4 // brush
 #define PIN_SIGNAL_LIGHT  LED_BUILTIN
 
 void setup() {
@@ -25,8 +25,8 @@ void loop() {
   delay(1000);
 
   digitalWrite(PIN_RELAY_BELAY,  LOW);
-  digitalWrite(PIN_RELAY_BRUSH,  LOW);
-  digitalWrite(PIN_RELAY_SPRAY,  LOW);
+  //digitalWrite(PIN_RELAY_BRUSH,  LOW);
+  //digitalWrite(PIN_RELAY_SPRAY,  LOW);.
   digitalWrite(PIN_SIGNAL_LIGHT, LOW);
   delay(2000);
 }

@@ -7,19 +7,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --green:   #4BD28F;
-      --teal:    #4BD2D2;
-      --blue:    #4B8FD2;
-
-      --bark:    #4B8FD2;   /* body text → blue */
-      --clay:    #4BD2D2;   /* h2 / metrics → teal */
-      --oat:     #C9A96E;   /* borders / accents */
-      --flax:    #E8D9B5;   /* light backgrounds */
-      --cream:   #F7F1E3;   /* page background */
-      --moss:    #4BD28F;   /* h3 titles / roles → green; also used as accent bg */
-      --sage:    #8FA870;
-      --stone:   #4B8FD2;   /* secondary body text → blue */
-      --chalk:   #FAFAF5;   /* card backgrounds */
+      --green:   #36ADA3;   /* teal accent */
+      --teal:    #36ADA3;
+      --blue:    #2F578A;   /* steel blue */
+      --bark:    #121358;   /* primary text — deep navy */
+      --clay:    #36ADA3;   /* h2 headings */
+      --oat:     #A8C0D8;   /* borders */
+      --flax:    #DDE8F5;   /* light card bg */
+      --cream:   #F0F5FB;   /* page background */
+      --moss:    #36ADA3;   /* accent / tags */
+      --sage:    #2F578A;
+      --stone:   #2F578A;   /* secondary text */
+      --chalk:   #F8FBFF;   /* card backgrounds */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +30,6 @@
       line-height: 1.75;
     }
 
-    /* ── TEXTURE OVERLAY ── */
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -40,6 +38,34 @@
       pointer-events: none;
       z-index: 0;
     }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(18, 19, 88, 0.96);
+      backdrop-filter: blur(6px);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      gap: 0.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      color: var(--teal);
+      text-decoration: none;
+      font-family: 'Lora', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+
+    nav a:hover { background: rgba(75, 210, 210, 0.12); color: var(--green); }
 
     /* ── HERO ── */
     header {
@@ -56,9 +82,9 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(40, 22, 8, 0.72) 0%,
-        rgba(40, 22, 8, 0.55) 60%,
-        rgba(30, 16, 4, 0.85) 100%
+        rgba(18, 19, 88, 0.72) 0%,
+        rgba(18, 19, 88, 0.50) 60%,
+        rgba(18, 19, 88, 0.88) 100%
       );
     }
 
@@ -116,12 +142,12 @@
     main {
       position: relative;
       z-index: 1;
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 3rem 1.5rem 5rem;
     }
 
-    section { margin-bottom: 4rem; }
+    section { margin-bottom: 4.5rem; }
 
     h2 {
       font-family: 'Playfair Display', serif;
@@ -132,7 +158,17 @@
       margin-bottom: 1.25rem;
     }
 
+    h3.sub-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--moss);
+      margin: 2rem 0 0.75rem;
+    }
+
     p { margin-bottom: 1rem; }
+
+    ul { margin: 0.5rem 0 1rem 1.5rem; }
+    ul li { margin-bottom: 0.4rem; }
 
     /* ── CALLOUT BOX ── */
     .callout {
@@ -144,6 +180,49 @@
       font-style: italic;
       color: var(--stone);
     }
+
+    /* ── IMAGE PLACEHOLDER ── */
+    .img-placeholder {
+      width: 100%;
+      min-height: 200px;
+      background: var(--flax);
+      border: 2px dashed var(--oat);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--stone);
+      font-style: italic;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+      gap: 0.5rem;
+    }
+
+    .img-placeholder .img-icon {
+      font-size: 2rem;
+      opacity: 0.4;
+    }
+
+    .img-placeholder .img-label {
+      font-weight: 600;
+      font-style: normal;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--oat);
+    }
+
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .img-grid .img-placeholder { min-height: 160px; }
 
     /* ── SPEC CARDS ── */
     .specs-grid {
@@ -197,7 +276,7 @@
 
     .sol-card.chosen {
       border-top-color: var(--moss);
-      background: #edf5e4;
+      background: #dff5f4;
     }
 
     .sol-card h3 {
@@ -225,6 +304,118 @@
       padding: 0.15rem 0.55rem;
       border-radius: 999px;
       margin-bottom: 0.4rem;
+    }
+
+    /* ── PROTOTYPE CARDS ── */
+    .proto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .proto-card {
+      background: var(--chalk);
+      border: 1px solid var(--oat);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .proto-card .proto-img {
+      min-height: 160px;
+      background: var(--flax);
+      border-bottom: 1px solid var(--oat);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+      gap: 0.4rem;
+      text-align: center;
+    }
+
+    .proto-card .proto-img .img-icon { font-size: 1.8rem; opacity: 0.4; }
+
+    .proto-card .proto-img .img-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--oat);
+      font-style: normal;
+    }
+
+    .proto-card .proto-body { padding: 1rem 1.1rem; }
+
+    .proto-card .proto-num {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--moss);
+      margin-bottom: 0.3rem;
+    }
+
+    .proto-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--bark);
+      margin-bottom: 0.4rem;
+    }
+
+    .proto-card p {
+      font-size: 0.86rem;
+      color: var(--stone);
+      margin-bottom: 0;
+    }
+
+    /* ── TESTING RESULTS TABLE ── */
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.25rem;
+      font-size: 0.88rem;
+    }
+
+    .results-table th {
+      background: #121358;
+      color: var(--teal);
+      text-align: left;
+      padding: 0.65rem 0.9rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .results-table td {
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid var(--oat);
+      vertical-align: top;
+    }
+
+    .results-table tr:nth-child(even) td { background: var(--flax); }
+
+    .pass {
+      display: inline-block;
+      background: #d0f0ee;
+      color: #1a5e5a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+    }
+
+    .fail {
+      display: inline-block;
+      background: #fde8e8;
+      color: #8b1a1a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
     }
 
     /* ── TEAM ── */
@@ -273,7 +464,7 @@
     }
 
     .hw-table th {
-      background: #1a2a3a;
+      background: #121358;
       color: var(--teal);
       text-align: left;
       padding: 0.6rem 0.9rem;
@@ -299,9 +490,127 @@
       color: var(--teal);
     }
 
+    /* ── BUSINESS CANVAS ── */
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .canvas-grid { grid-template-columns: 1fr; }
+    }
+
+    .canvas-cell {
+      background: var(--chalk);
+      border: 1px solid var(--oat);
+      border-radius: 6px;
+      padding: 0.9rem 1rem;
+    }
+
+    .canvas-cell h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--clay);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+
+    .canvas-cell p, .canvas-cell ul {
+      font-size: 0.83rem;
+      color: var(--stone);
+      margin-bottom: 0;
+    }
+
+    .canvas-cell.highlight {
+      background: #dff5f4;
+      border-color: var(--moss);
+    }
+
+    .canvas-cell.highlight h4 { color: var(--moss); }
+
+    /* ── ECON TABLES ── */
+    .econ-tables {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .econ-tables { grid-template-columns: 1fr; }
+    }
+
+    .econ-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+
+    .econ-table caption {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--clay);
+      text-align: left;
+      padding-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .econ-table th {
+      background: #121358;
+      color: var(--teal);
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .econ-table td {
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid var(--oat);
+    }
+
+    .econ-table tr:nth-child(even) td { background: var(--flax); }
+
+    .econ-table .total td {
+      font-weight: 700;
+      color: var(--clay);
+      background: var(--flax);
+      border-top: 2px solid var(--oat);
+    }
+
+    /* ── TAKEAWAYS ── */
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .takeaway-card {
+      background: var(--chalk);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      border-left: 4px solid var(--teal);
+    }
+
+    .takeaway-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--bark);
+      margin-bottom: 0.35rem;
+    }
+
+    .takeaway-card p {
+      font-size: 0.83rem;
+      color: var(--stone);
+      margin-bottom: 0;
+    }
+
     /* ── FOOTER ── */
     footer {
-      background: #0f1e2e;
+      background: #121358;
       color: var(--blue);
       text-align: center;
       padding: 2rem 1rem;
@@ -321,25 +630,72 @@
   <span class="badge">ENGS 21 — Dartmouth Engineering</span>
 </header>
 
+<nav>
+  <a href="#problem">Problem</a>
+  <a href="#sota">State of Art</a>
+  <a href="#solution">Solution</a>
+  <a href="#specs">Specs</a>
+  <a href="#prototyping">Prototypes</a>
+  <a href="#testing">Testing</a>
+  <a href="#sustainability">Ethics</a>
+  <a href="#business">Business</a>
+  <a href="#economics">Economics</a>
+  <a href="#takeaways">Takeaways</a>
+  <a href="#hardware">Hardware</a>
+  <a href="#team">Team</a>
+</nav>
+
 <main>
 
   <!-- PROBLEM -->
   <section id="problem">
     <h2>The Problem</h2>
     <p>
-      Indoor climbing gym walls are difficult to clean, resulting in infrequent cleaning and the buildup
-      of harmful bacteria — including what one study called a <em>"fecal veneer"</em> detectable on every wall
-      surface tested (Bräuer et al., 2014). With over <strong>695 commercial climbing gyms</strong> operating
-      in the US in 2026 and <strong>5.6 million indoor climbers</strong>, the exposure risk is significant.
+      Indoor climbing gyms are difficult to clean, resulting in infrequent cleaning and the buildup
+      of bacteria that can lead to infections. In 2021, over <strong>5.6 million people</strong> visited
+      climbing gyms. With <strong>695 commercial climbing gyms</strong> in the US, there are many
+      people who can benefit from our product. Two climbers on our team have personally suffered from
+      climbing-wall-born infections from hobby climbing.
     </p>
     <p>
-      Climbers spread bacteria via chalk-dusted hands and shoes, especially after restroom visits.
-      Current cleaning methods — an employee on a spray bottle lowered down the wall, or an annual
-      panel power-wash — are so labor-intensive that they are routinely skipped.
+      Climbing gym walls have been described as a <em>"fecal veneer"</em> by researchers
+      (Bräuer et al., 2014). Gyms are incentivized to keep a sanitary facility, as healthy
+      climbers are ones that will keep coming back. Private and international climbing gyms
+      offer an additional market, though one that could be more difficult to break into.
+    </p>
+    <p>
+      Our users are <strong>climbing gym employees</strong>. The product will be purchased by climbing gym
+      owners. The primary beneficiary will be clients, though this benefit to clients will also
+      monetarily benefit gym owners due to the marketability of a sanitary facility.
     </p>
     <div class="callout">
       "Both existing solutions result in infrequent cleanings or a lack of thorough sanitation."
     </div>
+  </section>
+
+  <!-- STATE OF THE ART -->
+  <section id="sota">
+    <h2>State of the Art</h2>
+    <p>
+      The current state of the art for climbing wall cleaning is the removal of all climbing holds,
+      followed by the removal of all wall panels, transportation of those panels to an alternate
+      location, power washing, and then reinstallment. This process can easily take <strong>all day or
+      longer</strong> and is usually only done <strong>once a year</strong> since it requires closing
+      the gym and a lot of manual effort.
+    </p>
+    <p>
+      Another option is to belay an individual up the wall with a soap and/or vinegar solution
+      with a rag to clean manually. This process is also highly time-intensive — some climbing
+      gym panels can be upwards of 100 sq ft — and scrubbing an entire gym is a major undertaking.
+    </p>
+    <p>
+      Automated wall cleaning technology has been explored in other areas: window cleaning robots
+      and pool cleaning robots have been patented. These devices, however, do not work for
+      climbing gyms — Patent Application No. 18/562,897 utilizes a massive liquid spraying system
+      which would create a mess indoors, and Patent No. US 9689170 B1 uses a large fan that would
+      put chalk and debris into the air. While these existing devices served as inspirations,
+      none can be directly used in indoor climbing gym wall sanitation.
+    </p>
   </section>
 
   <!-- SOLUTION -->
@@ -347,40 +703,47 @@
     <h2>Our Solution</h2>
     <p>
       <strong>On Belay?</strong> is a rope-mounted cleaning device that clips into the existing
-      top-rope belay infrastructure already present in every climbing gym. Two or more motor-powered
-      oscillating brushes scrub chalk and residue from the wall surface as an employee slowly lowers
-      the device. A spray system applies disinfectant, and a Shop-Vac attachment evacuates dislodged
-      chalk dust — no new rail infrastructure required.
+      top-rope belay infrastructure already present in every climbing gym. The device is raised to
+      the top of the wall, then belayed down by an operator as the roller brush cleans all dust
+      and the spray module disinfects. No new rail infrastructure is required.
     </p>
     <p>
-      The device is controlled via an <strong>Arduino Nano</strong> managing relay outputs for the
-      belay mechanism, brush motors, spray solenoid, and status light. Future revisions may add
-      Bluetooth remote control (ZS-040 / HM-10 module) for hands-free operation.
+      The final prototype consists of <strong>four subsystems</strong>: mechanical (roller &amp;
+      belay), electrical, and fluid. A relay system controls the brush and sprayer, activating them
+      once the device is in position — preventing mess during setup. The device is controlled via
+      an <strong>Arduino Nano</strong> managing relay outputs for the belay mechanism, brush motor,
+      spray solenoid, and status light.
     </p>
 
-    <h2 style="margin-top:2.5rem">Alternatives Considered</h2>
+    <h3 class="sub-heading">Alternatives Considered</h3>
     <div class="solutions-grid">
       <div class="sol-card chosen">
         <span class="chosen-tag">Selected</span>
         <h3>On Belay?</h3>
-        <p>Rope-mounted, oscillating brushes, spray + vac, uses existing infrastructure.</p>
+        <p>Rope-mounted, roller brush + disinfectant spray, uses existing belay infrastructure. Actively scrubs at operator-controlled speed.</p>
         <p class="score">Score: 57 / 72</p>
       </div>
       <div class="sol-card">
         <h3>Clean-O-Drapes</h3>
-        <p>Microfiber curtain on a ceiling rail, soaked in disinfectant, dragged across the wall.</p>
+        <p>Microfiber curtains on a ceiling rail, soaked in disinfectant, dragged across the wall. Passive and effective but requires new rail infrastructure.</p>
         <p class="score">Score: 55.5 / 72</p>
       </div>
       <div class="sol-card">
         <h3>Wallba</h3>
-        <p>Suction-powered autonomous robot navigates the wall — highest automation, highest complexity.</p>
+        <p>Suction-powered autonomous robot navigates the wall — highest automation, but extremely difficult to fabricate and risks damaging textured surfaces.</p>
         <p class="score">Score: 46 / 72</p>
       </div>
       <div class="sol-card">
         <h3>Clean Stik</h3>
-        <p>Telescoping pole with scrubber head; similar to state of the art but ground-operated.</p>
+        <p>Telescoping pole with scrubber head; similar to state of the art but ground-operated. Simplest design but least effective at upper wall sections.</p>
         <p class="score">Score: 47 / 72</p>
       </div>
+    </div>
+
+    <div class="callout" style="margin-top:2rem">
+      Ease of use and sanitation were the main driving factors. Damage-free was also heavily weighted
+      since it would be easier to convince climbing gyms to test and purchase a product with no risk
+      to their facility.
     </div>
   </section>
 
@@ -391,42 +754,509 @@
       <div class="spec-card">
         <h3>Ease of Use</h3>
         <p class="metric">&lt; 15 min setup, single operator</p>
-        <p>Addresses the core labor-intensity of current methods.</p>
+        <p>Addresses the core labor-intensity of current methods. One person sets up and cleans a panel in under 15 minutes.</p>
       </div>
       <div class="spec-card">
         <h3>Efficacy</h3>
         <p class="metric">&gt; 80% bacteria reduction</p>
-        <p>Kills pathogens and removes visible chalk buildup.</p>
+        <p>Kills pathogens and removes visible chalk buildup. Tested via swab and culture comparison.</p>
       </div>
       <div class="spec-card">
         <h3>Damage-Free</h3>
         <p class="metric">No visible wall damage</p>
-        <p>Critical for gym adoption — protects their facility investment.</p>
+        <p>Critical for gym adoption. Walls are visually inspected after each use to confirm no damage.</p>
       </div>
       <div class="spec-card">
         <h3>Speed</h3>
-        <p class="metric">&lt; 15 min per wall section</p>
-        <p>360 sq ft (5–6 ft wide × 60 ft tall) per cleaning cycle.</p>
+        <p class="metric">&lt; 15 min per 30 sq ft section</p>
+        <p>Targets the time-intensive nature of current cleaning. Measured via stopwatch on multiple runs.</p>
       </div>
       <div class="spec-card">
         <h3>Durability</h3>
-        <p class="metric">100+ wall cleanings</p>
-        <p>Stress tested for long-term reliable operation.</p>
+        <p class="metric">Survive 50+ cleaning sessions</p>
+        <p>Stress tested for reliable operation. Drop test from 15 ft used as durability benchmark.</p>
       </div>
       <div class="spec-card">
         <h3>Cost</h3>
         <p class="metric">&lt; $300 total system</p>
-        <p>Economically viable for commercial gym purchase.</p>
+        <p>Economically viable for commercial gym purchase. Mass production cost targeted at $200/unit.</p>
       </div>
       <div class="spec-card">
         <h3>Safety</h3>
-        <p class="metric">All safety standards met</p>
-        <p>Disinfectant handling, chalk dust ventilation, electronics.</p>
+        <p class="metric">No slips or drops during testing</p>
+        <p>Disinfectant handling, chalk dust ventilation, electronics. Pulley system generates enough friction to hold device.</p>
       </div>
       <div class="spec-card">
-        <h3>Legal &amp; Ethical</h3>
-        <p class="metric">Full compliance</p>
-        <p>Meets all US legal requirements; no ethical concerns.</p>
+        <h3>Usability</h3>
+        <p class="metric">Operate on 40° wall angles</p>
+        <p>Tested by belaying the device down various sections at Dartmouth and The Nook Climbing gyms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROTOTYPING -->
+  <section id="prototyping">
+    <h2>Prototyping</h2>
+    <p>
+      The team iterated through five major prototypes, with each addressing specific problems
+      identified in testing. Parts iteration — particularly for the brush arms, rope system, and
+      spraying mechanism — was vital for the final product's success.
+    </p>
+
+    <div class="proto-grid">
+      <div class="proto-card">
+        <div class="proto-img">
+          <span class="img-icon">📷</span>
+          <span class="img-label">Prototype 1 — Photo</span>
+        </div>
+        <div class="proto-body">
+          <div class="proto-num">First Prototype</div>
+          <h3>Oscillating Brush Layout</h3>
+          <p>A simple layout of motor and oscillating brush. After examining this model the team realized an oscillating brush was not optimal and began work on the second prototype.</p>
+        </div>
+      </div>
+      <div class="proto-card">
+        <div class="proto-img">
+          <span class="img-icon">📷</span>
+          <span class="img-label">Prototype 2 — Photo</span>
+        </div>
+        <div class="proto-body">
+          <div class="proto-num">Second Prototype</div>
+          <h3>Spinning Roller Brush</h3>
+          <p>Utilized a long spinning brush capable of cleaning the entire wall surface at once. Used the same motor and drill battery but added a chain-driven roller mounted on a fiberglass axle.</p>
+        </div>
+      </div>
+      <div class="proto-card">
+        <div class="proto-img">
+          <span class="img-icon">📷</span>
+          <span class="img-label">Prototype 3 — Photo</span>
+        </div>
+        <div class="proto-body">
+          <div class="proto-num">Third Prototype — Looks-Like</div>
+          <h3>Laser-Cut Chassis</h3>
+          <p>Established the final body design with a laser-cut chassis, laser-cut brush arms, wheels, and same motor layout. Served as the looks-like prototype.</p>
+        </div>
+      </div>
+      <div class="proto-card">
+        <div class="proto-img">
+          <span class="img-icon">📷</span>
+          <span class="img-label">Prototype 4 — Photo</span>
+        </div>
+        <div class="proto-body">
+          <div class="proto-num">Fourth Prototype — Works-Like</div>
+          <h3>Integrated Belay System</h3>
+          <p>Integrated the belaying system and switched from one to two ropes after testing. The 1-rope system could not properly tension the device to the wall. Brush arms refined through CAD and trial-and-error.</p>
+        </div>
+      </div>
+      <div class="proto-card" style="grid-column: 1 / -1;">
+        <div class="proto-img" style="min-height:240px;">
+          <span class="img-icon">📷</span>
+          <span class="img-label">Final Prototype — Photos (device on wall, in use)</span>
+        </div>
+        <div class="proto-body">
+          <div class="proto-num">Fifth Prototype — Final</div>
+          <h3>Full System with Spray Module</h3>
+          <p>
+            Resulted from iterating user feedback and attaching the disinfectant-spraying device.
+            Users requested a cover for the brush to prevent chalk spray, and better-timed spraying
+            so the device doesn't make a mess before it reaches the wall. A relay system was added
+            to control spray timing. 3D-printed covers were added over exposed chains, brush, and
+            electronics.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-heading">Engineering Drawings</h3>
+    <p>
+      These drawings guided the team's layout as development progressed. When integrating the
+      separate subsystems, the drawings proved vital to understanding how they would fit together.
+      From these drawings the team also created 3D-printed covers and laser-cut parts.
+    </p>
+    <div class="img-grid">
+      <div class="img-placeholder">
+        <span class="img-icon">📐</span>
+        <span class="img-label">Engineering Drawing — Front View</span>
+      </div>
+      <div class="img-placeholder">
+        <span class="img-icon">📐</span>
+        <span class="img-label">Engineering Drawing — Side View</span>
+      </div>
+    </div>
+
+    <h3 class="sub-heading">Parts Iteration</h3>
+    <p>
+      <strong>Rope system:</strong> During testing it became clear that a 1-rope system, though
+      easier to use, could not properly tension the device to the wall. This led to the
+      two-rope system present in the final prototype.
+    </p>
+    <div class="img-grid">
+      <div class="img-placeholder">
+        <span class="img-icon">📷</span>
+        <span class="img-label">1-Rope System (left) vs. 2-Rope System (right)</span>
+      </div>
+    </div>
+    <p>
+      <strong>Brush arms:</strong> Initially beginning with wooden laser-cut arms, the team
+      transitioned to machined metal arms hoping to improve durability. During testing, these
+      arms failed to properly angle the brush to be in contact with the wall. Through trial
+      and error, the team worked through many different arms until finding the correct shape
+      and size.
+    </p>
+    <div class="img-grid">
+      <div class="img-placeholder">
+        <span class="img-icon">📷</span>
+        <span class="img-label">Brush Arm Iterations (various)</span>
+      </div>
+      <div class="img-placeholder">
+        <span class="img-icon">📷</span>
+        <span class="img-label">Incorrect Brush Arm Angle</span>
+      </div>
+    </div>
+    <p>
+      <strong>Spraying mechanisms:</strong> Two different 3D-printed spray attachments were
+      designed, both of which were not fully watertight. Out of time, the team mounted the
+      attachments and taped existing spray nozzles to the side. Full integration of these
+      attachments is planned for future revisions.
+    </p>
+    <div class="img-grid">
+      <div class="img-placeholder">
+        <span class="img-icon">📷</span>
+        <span class="img-label">Spray Mechanism Development Chart</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTING -->
+  <section id="testing">
+    <h2>Testing &amp; Results</h2>
+    <p>
+      The team refined specifications as prototyping progressed, tailoring benchmarks to the
+      actual device. Ease of use became a measure of headcount required; speed became a specific
+      sq ft/min metric; setup time was added; safety was tailored to measure slips during
+      device operation; durability became a drop test; usability measured wall angle capability.
+    </p>
+
+    <div class="img-grid">
+      <div class="img-placeholder">
+        <span class="img-icon">📷</span>
+        <span class="img-label">Device in use at the gym — team member operating</span>
+      </div>
+      <div class="img-placeholder">
+        <span class="img-icon">📷</span>
+        <span class="img-label">User testing — volunteer from climbing gym</span>
+      </div>
+    </div>
+
+    <h3 class="sub-heading">Bacteria Testing (Efficacy)</h3>
+    <p>
+      Benchmark testing was conducted by swabbing climbing gym walls before and after cleaning,
+      alongside controls. Swabs were cultured on agar plates to determine bacteria counts.
+    </p>
+    <div class="img-grid">
+      <div class="img-placeholder">
+        <span class="img-icon">🧫</span>
+        <span class="img-label">Agar Plates — Wall pre-cleaning (count: 4)</span>
+      </div>
+      <div class="img-placeholder">
+        <span class="img-icon">🧫</span>
+        <span class="img-label">Agar Plates — Wall post-cleaning (count: 3 reduced colonies)</span>
+      </div>
+      <div class="img-placeholder">
+        <span class="img-icon">🧫</span>
+        <span class="img-label">Positive control (kitchen sink, count: 6–7)</span>
+      </div>
+      <div class="img-placeholder">
+        <span class="img-icon">🧫</span>
+        <span class="img-label">Negative control (no swab, count: 0)</span>
+      </div>
+    </div>
+
+    <h3 class="sub-heading">Results Summary</h3>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Specification</th>
+          <th>Target</th>
+          <th>Result</th>
+          <th>vs. Benchmark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Efficacy</strong></td>
+          <td>&gt; 80% bacteria reduction</td>
+          <td><strong>89.63% reduction</strong></td>
+          <td><span class="pass">Pass</span> Exceeded benchmark</td>
+        </tr>
+        <tr>
+          <td><strong>Speed + Setup</strong></td>
+          <td>&lt; 15 min for 30 sq ft; setup &lt; 5 min</td>
+          <td><strong>5 min 45 sec total</strong> (including setup) for 30 sq ft</td>
+          <td><span class="pass">Pass</span> Beat benchmark by ~9 min</td>
+        </tr>
+        <tr>
+          <td><strong>Ease of Use</strong></td>
+          <td>Operable by a single person</td>
+          <td>Single operator confirmed in testing</td>
+          <td><span class="pass">Pass</span> Beat state of art (requires multiple people)</td>
+        </tr>
+        <tr>
+          <td><strong>Damage-Free</strong></td>
+          <td>No visible wall damage</td>
+          <td>No damage observed in any test</td>
+          <td><span class="pass">Pass</span> Met benchmark</td>
+        </tr>
+        <tr>
+          <td><strong>Safety</strong></td>
+          <td>No slips or drops during testing</td>
+          <td>No slips or drops occurred</td>
+          <td><span class="pass">Pass</span> Met benchmark</td>
+        </tr>
+        <tr>
+          <td><strong>Price</strong></td>
+          <td>&lt; $300 to build</td>
+          <td><strong>$260.80</strong> total build cost</td>
+          <td><span class="pass">Pass</span> Under budget by ~$40</td>
+        </tr>
+        <tr>
+          <td><strong>Durability</strong></td>
+          <td>Survive 15 ft drop</td>
+          <td>Survived 5 ft drop onto mats; functional during standard use</td>
+          <td><span class="fail">Did Not Meet</span> Below 15 ft target</td>
+        </tr>
+        <tr>
+          <td><strong>Usability</strong></td>
+          <td>Operate on 40° inclined surfaces</td>
+          <td>Functional on flat, positively inclined, and up to 5° angled surfaces</td>
+          <td><span class="fail">Did Not Meet</span> Below 40° target</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SUSTAINABILITY & ETHICS -->
+  <section id="sustainability">
+    <h2>Sustainability &amp; Ethics</h2>
+    <p>
+      The eco-design strategy wheel shows strong performance across most dimensions: all primary
+      materials (wood, aluminum, metal) are recyclable; manufacturing uses CNC and laser-cutting
+      processes with minimal parts; the device runs on a rechargeable 12V battery with minimal
+      disinfectant waste; and it is designed for longevity with replaceable parts and reuse at
+      end-of-life. Parts can be replaced, the battery recharged, and the reservoir refilled.
+    </p>
+    <p>
+      The main sustainability weaknesses are the battery and plastic injection-molded components,
+      which could be improved through certified-recyclable sourcing or material substitution.
+      All materials used (wood, metal, plastic) are common and not subject to supply concerns.
+    </p>
+
+    <div class="img-placeholder">
+      <span class="img-icon">♻️</span>
+      <span class="img-label">Eco-Design Strategy Wheel — Sustainability Analysis</span>
+    </div>
+
+    <h3 class="sub-heading">Ethical Considerations</h3>
+    <p>
+      Ethical concerns center primarily around safety: the device could fall from height onto a
+      person, or expose users to cleaning chemicals. Both risks are mitigated by restricting
+      operation to belay-certified staff. A pulley system generates enough friction to hold the
+      device securely, and 3D-printed covers protect exposed chains, brush, and electronics.
+    </p>
+    <p>
+      The device has no foreseeable unintended uses outside of climbing gyms — the belay
+      infrastructure required to operate it exists only in climbing facilities. The product
+      will be available to all commercial and private gyms at a commercially reasonable price
+      point. No ethical concerns beyond standard safety protocols were identified.
+    </p>
+  </section>
+
+  <!-- BUSINESS PLAN -->
+  <section id="business">
+    <h2>Business Plan Canvas</h2>
+    <div class="canvas-grid">
+      <div class="canvas-cell">
+        <h4>Key Partners</h4>
+        <ul>
+          <li>Climbing equipment manufacturers</li>
+          <li>Dartmouth Climbing Gym</li>
+          <li>Commercial climbing gyms</li>
+        </ul>
+      </div>
+      <div class="canvas-cell highlight">
+        <h4>Value Proposition</h4>
+        <ul>
+          <li>Effective sanitation</li>
+          <li>Less labor</li>
+          <li>Reduced time</li>
+          <li>Easy to maintain — uses parts compatible with batteries and vacuums gyms already own</li>
+        </ul>
+      </div>
+      <div class="canvas-cell">
+        <h4>Customer Segments</h4>
+        <ul>
+          <li>Climbing gym managers &amp; owners</li>
+          <li>Climbing gym employees</li>
+          <li>Home gym owners</li>
+        </ul>
+      </div>
+      <div class="canvas-cell">
+        <h4>Key Activities</h4>
+        <ul>
+          <li>Cleaning more effectively and efficiently</li>
+          <li>Making the device low-profile, unobtrusive, and easy to use</li>
+        </ul>
+      </div>
+      <div class="canvas-cell">
+        <h4>Customer Relationships</h4>
+        <p>Forming a working relationship with climbing gyms so they can seek support operating the device, and seek replacement parts or maintenance.</p>
+      </div>
+      <div class="canvas-cell">
+        <h4>Channels</h4>
+        <ul>
+          <li>Relationships with large climbing gym chains for widespread adoption</li>
+          <li>On-site demos at climbing gyms</li>
+        </ul>
+      </div>
+      <div class="canvas-cell">
+        <h4>Key Resources</h4>
+        <ul>
+          <li>Product manufacturers</li>
+          <li>Material distributors</li>
+          <li>Rentable makerspace / warehouse</li>
+        </ul>
+      </div>
+      <div class="canvas-cell">
+        <h4>Cost Structure</h4>
+        <ul>
+          <li>One-time cost for device purchase</li>
+          <li>Replacement parts (brush, brush cover)</li>
+        </ul>
+      </div>
+      <div class="canvas-cell">
+        <h4>Revenue Streams</h4>
+        <ul>
+          <li>Device sales ($600/unit)</li>
+          <li>Cleaning solution refills (~$200/device/year)</li>
+          <li>Replacement parts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECONOMIC EVALUATION -->
+  <section id="economics">
+    <h2>Economic Evaluation</h2>
+
+    <div class="econ-tables">
+      <div>
+        <table class="econ-table">
+          <caption>Variable Costs per Unit</caption>
+          <thead>
+            <tr><th>Component</th><th>Cost</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Microcontroller (Arduino Nano)</td><td>$4.00</td></tr>
+            <tr><td>Step Down Breakout</td><td>$4.33</td></tr>
+            <tr><td>Relay Breakout</td><td>$3.50</td></tr>
+            <tr><td>Motor</td><td>$14.99</td></tr>
+            <tr><td>Brush</td><td>$88.49</td></tr>
+            <tr><td>Sprockets</td><td>$38.25</td></tr>
+            <tr><td>Bearings</td><td>$43.80</td></tr>
+            <tr><td>Screws</td><td>$29.80</td></tr>
+            <tr><td>Wheels</td><td>$6.70</td></tr>
+            <tr><td>Swiffer</td><td>$26.94</td></tr>
+          </tbody>
+          <tfoot>
+            <tr class="total"><td>Total</td><td>$260.80</td></tr>
+          </tfoot>
+        </table>
+        <p style="font-size:0.78rem;font-style:italic;margin-top:0.5rem;color:var(--stone)">
+          *Mass production price lower; parts at full scale may cost more.
+        </p>
+      </div>
+      <div>
+        <table class="econ-table">
+          <caption>Fixed Costs per Year</caption>
+          <thead>
+            <tr><th>Item</th><th>Amount</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Rent (manufacturing &amp; warehouse)</td><td>$60,000/yr</td></tr>
+            <tr><td>Travel costs (gym demos)</td><td>$2,000/yr</td></tr>
+            <tr><td>Insurance / legal</td><td>$7,000/yr</td></tr>
+            <tr><td>Owner salaries (×4)</td><td>$120,000/yr</td></tr>
+          </tbody>
+          <tfoot>
+            <tr class="total"><td>Total</td><td>$134,000/yr</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sub-heading">Breakeven Analysis</h3>
+    <table class="results-table" style="margin-top:1rem">
+      <thead>
+        <tr><th>Metric</th><th>Value / Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Selling price per unit</td><td>$600</td></tr>
+        <tr><td>Mass production cost per unit</td><td>$200</td></tr>
+        <tr><td>Profit per unit (device only)</td><td>$400</td></tr>
+        <tr><td>Units to break even (device only)</td><td><strong>335 units/yr</strong></td></tr>
+        <tr><td>Commercial climbing gyms in US</td><td>695</td></tr>
+        <tr><td>Assessment (device only)</td><td>~48% market share required</td></tr>
+        <tr><td>Refill revenue per device/year</td><td>~$200/yr</td></tr>
+        <tr><td>Effective profit (with refills)</td><td>$600/unit</td></tr>
+        <tr><td>Units to break even (with refills)</td><td><strong>223 units/yr</strong></td></tr>
+        <tr><td>Assessment (with refills)</td><td>More sustainable; innovation needed</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1rem">
+      As-is, the business model is not fully sustainable — at break-even volume, the US market
+      of 695 gyms would be exhausted in about 3 years. However, by expanding to private climbing
+      gyms and international gyms, and continuing to generate new products, the business model
+      could still be feasible.
+    </p>
+  </section>
+
+  <!-- IMPROVEMENTS & TAKEAWAYS -->
+  <section id="takeaways">
+    <h2>Improvements &amp; Takeaways</h2>
+    <p>
+      The team identified several areas for improvement and drew important lessons from the
+      challenges encountered during design, fabrication, and testing.
+    </p>
+
+    <h3 class="sub-heading">Areas for Improvement</h3>
+    <ul>
+      <li>Enable the device to handle more <strong>overhung wall angles</strong> (currently limited to ~5°)</li>
+      <li>Increase durability by replacing wood and 3D-printed parts with <strong>metal and robust plastics</strong></li>
+      <li>Add <strong>automatic on/off functionality</strong> (currently requires programming per device sold)</li>
+      <li>Widen the cleaning surface to cover a greater wall area per pass</li>
+      <li>Reduce device weight (users flagged it as too heavy)</li>
+      <li>Simplify the two-rope system (users found it unintuitive)</li>
+      <li>Add <strong>automatic lowering/raising</strong> for hands-free operation</li>
+      <li>Fully integrate the spray nozzle attachments (currently taped)</li>
+    </ul>
+
+    <h3 class="sub-heading">Team Takeaways</h3>
+    <div class="takeaway-grid">
+      <div class="takeaway-card">
+        <h4>Greta Batchelor</h4>
+        <p>Test early and often rather than relying solely on CAD. Physical prototypes reveal problems that models cannot.</p>
+      </div>
+      <div class="takeaway-card">
+        <h4>Jonah Hymes</h4>
+        <p>Design for modularity to allow quick part swapping. Modular subsystems made iteration far more manageable.</p>
+      </div>
+      <div class="takeaway-card">
+        <h4>Finnley Blankenship</h4>
+        <p>Make all components removable and iterable. The ability to swap individual parts without disassembling the whole device is critical.</p>
+      </div>
+      <div class="takeaway-card">
+        <h4>Gaven May</h4>
+        <p>Testing individual modules is not the same as testing an integrated device. Getting parts to work together proved to be the most critical challenge.</p>
       </div>
     </div>
   </section>
@@ -444,14 +1274,20 @@
       </thead>
       <tbody>
         <tr><td><code>PIN_RELAY_BELAY</code></td><td>D2</td><td>Belay motor relay</td></tr>
-        <tr><td><code>PIN_RELAY_BRUSH</code></td><td>D3</td><td>Oscillating brush motor relay</td></tr>
+        <tr><td><code>PIN_RELAY_BRUSH</code></td><td>D3</td><td>Roller brush motor relay</td></tr>
         <tr><td><code>PIN_RELAY_SPRAY</code></td><td>D4</td><td>Disinfectant spray solenoid relay</td></tr>
         <tr><td><code>PIN_SIGNAL_LIGHT</code></td><td>D13 (LED_BUILTIN)</td><td>Status indicator light</td></tr>
       </tbody>
     </table>
     <p style="margin-top:1rem">
-      Built with the Arduino framework. Source available on GitHub.
+      The relay system is key to preventing mess: the brush and spray module are only activated
+      once the device is in position on the wall, not during the raising phase. Built with the
+      Arduino framework. Source available on GitHub.
     </p>
+    <div class="img-placeholder" style="min-height:160px">
+      <span class="img-icon">⚡</span>
+      <span class="img-label">Electronics Wiring Diagram / Control System Photo</span>
+    </div>
   </section>
 
   <!-- TEAM -->
@@ -484,10 +1320,10 @@
 </main>
 
 <footer>
-  <p>ENGS 21 &mdash; Dartmouth College &mdash; 2026</p>
+  <p>ENGS 21 &mdash; Dartmouth College &mdash; Spring 2026 &mdash; Team 11: Bigger Boulder Better</p>
   <p style="margin-top:0.4rem; opacity:0.7">
     Bräuer et al. (2014) &bull; Climbing Business Journal (2022, 2026) &bull;
-    Won et al. (2022, Patent US 2024/0217092 A1)
+    Won et al. (2022, Patent US 2024/0217092 A1) &bull; Patent EP 4389586 A1
   </p>
 </footer>
 
