@@ -322,27 +322,16 @@
     }
 
     .proto-card .proto-img {
-      min-height: 160px;
-      background: var(--flax);
       border-bottom: 1px solid var(--oat);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.2rem;
-      gap: 0.4rem;
-      text-align: center;
+      overflow: hidden;
+      background: var(--flax);
     }
 
-    .proto-card .proto-img .img-icon { font-size: 1.8rem; opacity: 0.4; }
-
-    .proto-card .proto-img .img-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--oat);
-      font-style: normal;
+    .proto-card .proto-img img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
     }
 
     .proto-card .proto-body { padding: 1rem 1.1rem; }
@@ -608,6 +597,91 @@
       margin-bottom: 0;
     }
 
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(18, 19, 88, 0.92);
+      backdrop-filter: blur(6px);
+      cursor: zoom-out;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox img {
+      max-width: min(90vw, 960px);
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+      cursor: default;
+    }
+
+    #lightbox-caption {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.75);
+      font-family: 'Lora', serif;
+      font-size: 0.82rem;
+      font-style: italic;
+      text-align: center;
+      max-width: 640px;
+      pointer-events: none;
+    }
+
+    #lightbox-close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 1.8rem;
+      line-height: 1;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      transition: color 0.15s;
+    }
+
+    #lightbox-close:hover { color: #fff; }
+
+    /* make every site image show as clickable */
+    .proto-card .proto-img img,
+    .img-grid img,
+    .report-img {
+      cursor: zoom-in;
+      transition: opacity 0.15s;
+    }
+
+    .proto-card .proto-img img:hover,
+    .img-grid img:hover,
+    .report-img:hover { opacity: 0.88; }
+
+    /* ── REPORT IMAGES ── */
+    .report-img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid var(--oat);
+      margin: 1rem 0;
+    }
+
+    .img-grid img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid var(--oat);
+      height: 220px;
+      object-fit: cover;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: #121358;
@@ -740,6 +814,8 @@
       </div>
     </div>
 
+    <img src="images/p07-alternatives-matrix.png" alt="Alternatives decision matrix — weighted scoring across all four candidate solutions" class="report-img" style="margin-top:1.5rem;" />
+
     <div class="callout" style="margin-top:2rem">
       Ease of use and sanitation were the main driving factors. Damage-free was also heavily weighted
       since it would be easier to convince climbing gyms to test and purchase a product with no risk
@@ -806,8 +882,7 @@
     <div class="proto-grid">
       <div class="proto-card">
         <div class="proto-img">
-          <span class="img-icon">📷</span>
-          <span class="img-label">Prototype 1 — Photo</span>
+          <img src="images/p08-proto1-proto2-proto3-proto4-0.jpg" alt="First prototype — cardboard chassis with oscillating brush and 12V motor" />
         </div>
         <div class="proto-body">
           <div class="proto-num">First Prototype</div>
@@ -817,8 +892,7 @@
       </div>
       <div class="proto-card">
         <div class="proto-img">
-          <span class="img-icon">📷</span>
-          <span class="img-label">Prototype 2 — Photo</span>
+          <img src="images/p08-proto1-proto2-proto3-proto4-1.jpg" alt="Second prototype — chain-driven roller brush on cardboard frame" />
         </div>
         <div class="proto-body">
           <div class="proto-num">Second Prototype</div>
@@ -828,8 +902,7 @@
       </div>
       <div class="proto-card">
         <div class="proto-img">
-          <span class="img-icon">📷</span>
-          <span class="img-label">Prototype 3 — Photo</span>
+          <img src="images/p08-proto1-proto2-proto3-proto4-2.jpg" alt="Third prototype — laser-cut chassis with blue roller brush" />
         </div>
         <div class="proto-body">
           <div class="proto-num">Third Prototype — Looks-Like</div>
@@ -839,8 +912,7 @@
       </div>
       <div class="proto-card">
         <div class="proto-img">
-          <span class="img-icon">📷</span>
-          <span class="img-label">Prototype 4 — Photo</span>
+          <img src="images/p08-proto1-proto2-proto3-proto4-3.jpg" alt="Fourth prototype — integrated belay system tested on climbing wall" />
         </div>
         <div class="proto-body">
           <div class="proto-num">Fourth Prototype — Works-Like</div>
@@ -850,8 +922,7 @@
       </div>
       <div class="proto-card" style="grid-column: 1 / -1;">
         <div class="proto-img" style="min-height:240px;">
-          <span class="img-icon">📷</span>
-          <span class="img-label">Final Prototype — Photos (device on wall, in use)</span>
+          <img src="images/p09-proto5-final.png" alt="Final prototype — four studio views of completed device with black cover" style="height:280px;" />
         </div>
         <div class="proto-body">
           <div class="proto-num">Fifth Prototype — Final</div>
@@ -874,14 +945,8 @@
       From these drawings the team also created 3D-printed covers and laser-cut parts.
     </p>
     <div class="img-grid">
-      <div class="img-placeholder">
-        <span class="img-icon">📐</span>
-        <span class="img-label">Engineering Drawing — Front View</span>
-      </div>
-      <div class="img-placeholder">
-        <span class="img-icon">📐</span>
-        <span class="img-label">Engineering Drawing — Side View</span>
-      </div>
+      <img src="images/p10-drawings-0.png" alt="Original color-coded CAD drawings — top, wall, side, and outside views" />
+      <img src="images/p10-drawings-1.png" alt="Updated CAD drawings — with reservoir and spray system placement" />
     </div>
 
     <h3 class="sub-heading">Parts Iteration</h3>
@@ -891,10 +956,8 @@
       two-rope system present in the final prototype.
     </p>
     <div class="img-grid">
-      <div class="img-placeholder">
-        <span class="img-icon">📷</span>
-        <span class="img-label">1-Rope System (left) vs. 2-Rope System (right)</span>
-      </div>
+      <img src="images/p11-parts-iteration-ropes-brusharms-1.png" alt="Testing the rope system — device being lowered on 1-rope configuration" />
+      <img src="images/p11-parts-iteration-ropes-brusharms-0.jpg" alt="Final 2-rope system in use — operator lowers device at The Nook climbing gym" />
     </div>
     <p>
       <strong>Brush arms:</strong> Initially beginning with wooden laser-cut arms, the team
@@ -904,14 +967,8 @@
       and size.
     </p>
     <div class="img-grid">
-      <div class="img-placeholder">
-        <span class="img-icon">📷</span>
-        <span class="img-label">Brush Arm Iterations (various)</span>
-      </div>
-      <div class="img-placeholder">
-        <span class="img-icon">📷</span>
-        <span class="img-label">Incorrect Brush Arm Angle</span>
-      </div>
+      <img src="images/p11-parts-iteration-ropes-brusharms-2.png" alt="Brush arm iterations — laser-cut wooden arms (left) and device on wall showing arm angle (right)" />
+      <img src="images/p16-post-cleaning-bacteria-3.jpg" alt="Device on wall showing brush arm angle and contact with wall surface" />
     </div>
     <p>
       <strong>Spraying mechanisms:</strong> Two different 3D-printed spray attachments were
@@ -920,10 +977,8 @@
       attachments is planned for future revisions.
     </p>
     <div class="img-grid">
-      <div class="img-placeholder">
-        <span class="img-icon">📷</span>
-        <span class="img-label">Spray Mechanism Development Chart</span>
-      </div>
+      <img src="images/p12-spray-mechanisms-0.png" alt="3D-printed spray mechanism attachments — two iterations of the nozzle housing" />
+      <img src="images/p12-spray-mechanisms-1.png" alt="Spray mechanism development chart — from Swiffer inspiration through design to 3D-printed prototypes" />
     </div>
   </section>
 
@@ -938,14 +993,8 @@
     </p>
 
     <div class="img-grid">
-      <div class="img-placeholder">
-        <span class="img-icon">📷</span>
-        <span class="img-label">Device in use at the gym — team member operating</span>
-      </div>
-      <div class="img-placeholder">
-        <span class="img-icon">📷</span>
-        <span class="img-label">User testing — volunteer from climbing gym</span>
-      </div>
+      <img src="images/p13-testing-in-use.png" alt="Four-panel collage of device in use at climbing gym — team members and volunteer operating the device" />
+      <img src="images/p16-post-cleaning-bacteria-4.jpg" alt="Two team members at Dartmouth gym — one setting up device at top, one belaying at bottom" />
     </div>
 
     <h3 class="sub-heading">Bacteria Testing (Efficacy)</h3>
@@ -954,22 +1003,10 @@
       alongside controls. Swabs were cultured on agar plates to determine bacteria counts.
     </p>
     <div class="img-grid">
-      <div class="img-placeholder">
-        <span class="img-icon">🧫</span>
-        <span class="img-label">Agar Plates — Wall pre-cleaning (count: 4)</span>
-      </div>
-      <div class="img-placeholder">
-        <span class="img-icon">🧫</span>
-        <span class="img-label">Agar Plates — Wall post-cleaning (count: 3 reduced colonies)</span>
-      </div>
-      <div class="img-placeholder">
-        <span class="img-icon">🧫</span>
-        <span class="img-label">Positive control (kitchen sink, count: 6–7)</span>
-      </div>
-      <div class="img-placeholder">
-        <span class="img-icon">🧫</span>
-        <span class="img-label">Negative control (no swab, count: 0)</span>
-      </div>
+      <img src="images/p15-agar-plates-0.png" alt="Benchmark agar plates — wall pre-cleaning swab series" />
+      <img src="images/p15-agar-plates-1.png" alt="Post-cleaning agar plates showing reduced colony growth" />
+      <img src="images/p16-post-cleaning-bacteria-0.jpg" alt="Close-up agar plate — pre-cleaning (B/D, count 492 CFU annotated)" />
+      <img src="images/p15-agar-plates-2.png" alt="Control plates — positive (kitchen sink) and negative (no swab) comparison" />
     </div>
 
     <h3 class="sub-heading">Results Summary</h3>
@@ -1051,10 +1088,9 @@
       All materials used (wood, metal, plastic) are common and not subject to supply concerns.
     </p>
 
-    <div class="img-placeholder">
-      <span class="img-icon">♻️</span>
-      <span class="img-label">Eco-Design Strategy Wheel — Sustainability Analysis</span>
-    </div>
+    <img src="images/p19-sustainability-ethics-0.png" alt="Eco-Design Strategy Wheel showing strong performance across materials, manufacturing, use, distribution, and end-of-life dimensions" class="report-img" />
+
+    <img src="images/p19-sustainability-ethics-1.png" alt="Final device close-up on climbing wall — brush engaged against surface with climbing hold visible" class="report-img" />
 
     <h3 class="sub-heading">Ethical Considerations</h3>
     <p>
@@ -1284,10 +1320,7 @@
       once the device is in position on the wall, not during the raising phase. Built with the
       Arduino framework. Source available on GitHub.
     </p>
-    <div class="img-placeholder" style="min-height:160px">
-      <span class="img-icon">⚡</span>
-      <span class="img-label">Electronics Wiring Diagram / Control System Photo</span>
-    </div>
+    <img src="images/p18-usability.jpg" alt="Final device on wall during operation — electronics, relay, and brush arm visible" class="report-img" />
   </section>
 
   <!-- TEAM -->
@@ -1327,5 +1360,41 @@
   </p>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close" aria-label="Close">&times;</button>
+  <img id="lightbox-img" src="" alt="" />
+  <div id="lightbox-caption"></div>
+</div>
+
+<script>
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lightbox-img');
+  const lbCap   = document.getElementById('lightbox-caption');
+  const lbClose = document.getElementById('lightbox-close');
+
+  function open(src, alt) {
+    lbImg.src = src;
+    lbCap.textContent = alt || '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  // attach to every img on the page except the hero background
+  document.querySelectorAll('main img, #lightbox-img').forEach(img => {
+    if (img.id === 'lightbox-img') return;
+    img.addEventListener('click', () => open(img.src, img.alt));
+  });
+
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  lbClose.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+</script>
 </body>
 </html>
